@@ -100,7 +100,8 @@ async function getGeminiSingleWord(question) {
     throw new Error('GEMINI_API_KEY is not configured');
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   const prompt = `Answer the following question in exactly one word.\nQuestion: ${question}`;
   const body = {
     contents: [
@@ -168,7 +169,7 @@ function normalizeAiError(err, provider) {
 }
 
 async function getSingleWordAIAnswer(question) {
-  const provider = (process.env.AI_PROVIDER || 'auto').toLowerCase();
+  const provider = (process.env.AI_PROVIDER || 'gemini').toLowerCase();
   const hasGemini = Boolean(process.env.GEMINI_API_KEY);
   const hasOpenAI = Boolean(process.env.OPENAI_API_KEY);
 
