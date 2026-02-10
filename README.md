@@ -53,7 +53,7 @@ Errors:
    ```bash
    cp .env.example .env
    ```
-   Then edit `.env` and set:
+  Then edit `.env` and set:
   - `OFFICIAL_EMAIL` to your Chitkara email
   - `GEMINI_API_KEY` from https://aistudio.google.com (optional)
   - `OPENAI_API_KEY` from https://platform.openai.com/api-keys (optional)
@@ -103,12 +103,21 @@ If you need to expose your local API publicly for testing:
   npm start
   ```
 
-2. In another terminal, run ngrok on the same port (for example 3001):
+2. Install ngrok (if `ngrok` is not recognized):
+  - Download from https://ngrok.com/download
+  - Unzip and run it from that folder, or add it to PATH
+
+3. In another terminal, run ngrok on the same port (for example 3001):
   ```bash
   ngrok http 3001
   ```
 
-3. ngrok will show a URL like `https://xxxx-xxxx.ngrok-free.app`.
+  If you did not add ngrok to PATH, run it like this from its folder:
+  ```bash
+  .\ngrok.exe http 3001
+  ```
+
+4. ngrok will show a URL like `https://xxxx-xxxx.ngrok-free.app`.
   Use this URL instead of `http://localhost:3001` when calling:
   - `GET /health`
   - `POST /bfhl`
